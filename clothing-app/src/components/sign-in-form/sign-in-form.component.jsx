@@ -25,7 +25,8 @@ const SignInForm = () => {
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
   };
-  const { setCurrentUser } = useContext(UserContext);
+
+
   const signInWithGoogle = async () => {
     const { user } = await signInWithGooglePopup();
     await createUserDocumentFromAuth(user);
@@ -39,7 +40,6 @@ const SignInForm = () => {
         email,
         password
       );
-      setCurrentUser(user);
       resetFormFields();
     } catch (error) {
       switch (error.code) {

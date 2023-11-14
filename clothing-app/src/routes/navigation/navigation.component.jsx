@@ -1,5 +1,5 @@
 import { Fragment, useContext } from "react";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom"; //outlet used to specify where the dynamic part should render
 
 import { ReactComponent as CrwnLogo } from "../../assets/crwn.svg";
 import { UserContext } from "../../contexts/user.context";
@@ -23,7 +23,7 @@ const Navigation = () => {
           <Link className="nav-link" to="/shop">
             SHOP
           </Link>
-          {currentUser ? (
+          {currentUser ? ( //if current user != null (default value of user context) then shows sign out otherwise sign in.
             <span className="nav-link" onClick={signOutHandler}>
               SIGN OUT
             </span>

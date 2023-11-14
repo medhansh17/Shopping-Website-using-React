@@ -26,8 +26,8 @@ const SignUpForm = () => {
     setFormFields(defaultFormFields);
   };
 
-  console.log("Hit");
-  const { setCurrentUser } = useContext(UserContext);
+  const { setCurrentUser } = useContext(UserContext); // destructuring UserContext
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -41,8 +41,8 @@ const SignUpForm = () => {
         email,
         password
       );
-      setCurrentUser(user);
-      await createUserDocumentFromAuth(user, { displayName });
+      setCurrentUser(user);   // signs-in current user
+      await createUserDocumentFromAuth(user, { displayName }); //firebase document
       resetFormFields();
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
@@ -55,7 +55,6 @@ const SignUpForm = () => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-
     setFormFields({ ...formFields, [name]: value });
   };
 
