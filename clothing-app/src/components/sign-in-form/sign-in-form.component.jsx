@@ -53,7 +53,7 @@ const SignInForm = () => {
           alert("Sign in failed!");
           break;
         default:
-          console.log(error);
+          alert(error);
           break;
       }
     }
