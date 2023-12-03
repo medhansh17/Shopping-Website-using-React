@@ -6,12 +6,7 @@ import { UserContext } from "../../contexts/user.context";
 import "./navigation.styles.scss";
 import { signOutUser } from "../../utils/firebase/firebase.utils";
 const Navigation = () => {
-  const { currentUser, setCurrentUser } = useContext(UserContext);
-
-  const signOutHandler = async () => {
-    await signOutUser();
-    setCurrentUser(null);
-  };
+  const { currentUser } = useContext(UserContext);
 
   return (
     <Fragment>
@@ -24,7 +19,7 @@ const Navigation = () => {
             SHOP
           </Link>
           {currentUser ? ( //if current user != null (default value of user context) then shows sign out otherwise sign in.
-            <span className="nav-link" onClick={signOutHandler}>
+            <span className="nav-link" onClick={signOutUser}>
               SIGN OUT
             </span>
           ) : (
