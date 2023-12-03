@@ -1,22 +1,19 @@
 import { useState } from "react";
-
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
-
 import {
   signInWithGooglePopup,
   signInAuthUserWithEmailAndPassword,
 } from "../../utils/firebase/firebase.utils";
-
 import "./sign-in-form.styles.scss";
 
-const defaultFormFields = {
+const defaultFormFields = {  //default form-fields to use
   email: "",
   password: "",
 };
 
 const SignInForm = () => {
-  const [formFields, setFormFields] = useState(defaultFormFields);
+  const [formFields, setFormFields] = useState(defaultFormFields); //setting form fields as ""
   const { email, password } = formFields;
 
   const resetFormFields = () => {
@@ -24,7 +21,7 @@ const SignInForm = () => {
   };
 
   const signInWithGoogle = async () => {
-    await signInWithGooglePopup();
+    await signInWithGooglePopup(); //auth state will change on sign-in
   };
 
   const handleSubmit = async (event) => {
@@ -57,7 +54,7 @@ const SignInForm = () => {
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    setFormFields({ ...formFields, [name]: value });
+    setFormFields({ ...formFields, [name]: value }); //name = name of input field ,value = input's value,using spread operator we update the fields in form-fields
   };
 
   return (
