@@ -1,7 +1,8 @@
 import { Fragment, useContext } from "react";
 import { Outlet, Link } from "react-router-dom"; //outlet used to specify where the dynamic part should render
-
 import { ReactComponent as CrwnLogo } from "../../assets/crwn.svg";
+import CartItem from "../../components/cart-icon/cart-icon.component";
+import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
 import { UserContext } from "../../contexts/user.context";
 import "./navigation.styles.scss";
 import { signOutUser } from "../../utils/firebase/firebase.utils";
@@ -27,7 +28,9 @@ const Navigation = () => {
               SIGN IN
             </Link>
           )}
+          <CartItem />
         </div>
+        <CartDropdown />
       </div>
       <Outlet />
     </Fragment>
