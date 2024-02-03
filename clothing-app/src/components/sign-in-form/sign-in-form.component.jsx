@@ -6,13 +6,16 @@ import {
   signInAuthUserWithEmailAndPassword,
 } from "../../utils/firebase/firebase.utils";
 import "./sign-in-form.styles.scss";
+import { useNavigate } from "react-router-dom";
 
-const defaultFormFields = {  //default form-fields to use
+const defaultFormFields = {
+  //default form-fields to use
   email: "",
   password: "",
 };
 
 const SignInForm = () => {
+  const navigate = useNavigate();
   const [formFields, setFormFields] = useState(defaultFormFields); //setting form fields as ""
   const { email, password } = formFields;
 
@@ -22,6 +25,7 @@ const SignInForm = () => {
 
   const signInWithGoogle = async () => {
     await signInWithGooglePopup(); //auth state will change on sign-in
+    navigate("/");
   };
 
   const handleSubmit = async (event) => {
@@ -32,6 +36,7 @@ const SignInForm = () => {
         email,
         password
       );
+      navigate("/");
       resetFormFields();
     } catch (error) {
       switch (error.code) {
