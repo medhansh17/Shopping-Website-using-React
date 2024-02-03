@@ -1,6 +1,8 @@
 import { useState } from "react";
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
   signInWithGooglePopup,
   signInAuthUserWithEmailAndPassword,
@@ -13,7 +15,16 @@ const defaultFormFields = {
   email: "",
   password: "",
 };
-
+const showToastMessage = () => {
+  toast.success("Signed In Successfully!", {
+    position: "top-right",
+  });
+};
+const showToastError = (error) => {
+  toast.error(error, {
+    position: "top-right",
+  });
+};
 const SignInForm = () => {
   const navigate = useNavigate();
   const [formFields, setFormFields] = useState(defaultFormFields); //setting form fields as ""
@@ -26,6 +37,7 @@ const SignInForm = () => {
   const signInWithGoogle = async () => {
     await signInWithGooglePopup(); //auth state will change on sign-in
     navigate("/");
+    showToastMessage();
   };
 
   const handleSubmit = async (event) => {
@@ -41,16 +53,16 @@ const SignInForm = () => {
     } catch (error) {
       switch (error.code) {
         case "auth/wrong-password":
-          alert("incorrect password for email");
+          showToastError("Wrong Password");
           break;
         case "auth/user-not-found":
-          alert("no user associated with this email");
+          showToastError("no user associated with this email");
           break;
         case "auth/popup-closed-by-user":
-          alert("Sign in failed!");
+          showToastError("Sign in failed!");
           break;
         default:
-          alert(error);
+          showToastError(error.code);
           break;
       }
     }

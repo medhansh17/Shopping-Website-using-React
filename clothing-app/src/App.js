@@ -8,6 +8,7 @@ import Checkout from "./routes/checkout/checkout.component";
 import { UserContext } from "./contexts/user.context";
 import { useState } from "react";
 
+
 const App = () => {
   const navigate = useNavigate();
   const { currentUser } = useState(UserContext);

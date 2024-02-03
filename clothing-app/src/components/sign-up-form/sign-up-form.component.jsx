@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import FormInput from "../form-input/form-input.component.jsx";
 import Button from "../button/button.component";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
@@ -18,6 +18,16 @@ const defaultFormFields = {
   confirmPassword: "",
 };
 
+const showToastMessage = () => {
+  toast.success("Signed In Successfully!", {
+    position: "top-right",
+  });
+};
+const showToastError = (error) => {
+  toast.error(error, {
+    position: "top-right",
+  });
+};
 const SignUpForm = () => {
   const navigate = useNavigate();
   const [formFields, setFormFields] = useState(defaultFormFields);
@@ -31,9 +41,7 @@ const SignUpForm = () => {
     event.preventDefault();
 
     if (password !== confirmPassword) {
-      alert("passwords do not match");
-
-      navigate("/");
+      showToastError("Passwords Do Not Match");
       return;
     }
 
@@ -43,12 +51,14 @@ const SignUpForm = () => {
         password
       );
       await createUserDocumentFromAuth(user, { displayName }); //firebase document
+      navigate("/");
+      showToastMessage();
       resetFormFields();
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
-        alert("Cannot create user, email already in use");
+        showToastError("Cannot create user, email already in use");
       } else {
-        alert("user creation encountered an error", error);
+        showToastError("user creation encountered an error", error.code);
       }
     }
   };
