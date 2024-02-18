@@ -1,2 +1,1 @@
-# Shopping-Website-using-React
-A shopping website created using react.
+Hosted At - https://main--mellow-kashata-c7b5e5.netlify.app/
