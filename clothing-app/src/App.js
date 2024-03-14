@@ -8,7 +8,6 @@ import Checkout from "./routes/checkout/checkout.component";
 import { UserContext } from "./contexts/user.context";
 import { useState } from "react";
 
-
 const App = () => {
   const navigate = useNavigate();
   const { currentUser } = useState(UserContext);
@@ -18,10 +17,7 @@ const App = () => {
         <Route index element={<Home />} />
         <Route path="shop/*" element={<Shop />} />
         <Route path="auth" element={<Authentication />} />
-        <Route
-          path="checkout"
-          element={currentUser ? <Checkout /> : <Authentication />}
-        />
+        <Route path="checkout" element={<Checkout />} />
       </Route>
     </Routes>
   );
